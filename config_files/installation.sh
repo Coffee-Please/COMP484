@@ -22,4 +22,10 @@ sudo apt-get install nodejs
 node --version
 npm --version
 #
+#----------------------------------------------
+# INSTALL SOFTWARE
+#----------------------------------------------
+npm install express socket.io moment
+npm install -D nodemon
+#
 # END INSTALLATION.SH
