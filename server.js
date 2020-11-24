@@ -25,10 +25,17 @@ io.on('connection', socket => {
         socket.join(user.room);
 
         // This runs when the client connects
-        socket.emit('message', formatMessage(botName, 'Welcome to the Chatroom'));
+        socket.emit('message', formatMessage(botName, `Welcome to ${user.room}`));
 
         // Broadcast to all when a client connects
         socket.broadcast.to(user.room).emit('message', formatMessage(botName, `${user.username} has joined the chat`));
+
+        // Send users and room info
+        io.to(user.room).emit('roomUsers', {
+            room: user.room,
+            users: getRoomUsers(user.room)
+        });
+
     });
 
     // Listen for chat Message
@@ -46,6 +53,12 @@ io.on('connection', socket => {
         // if the user who left the chat is the current user, emit message to their room
         if(user) {
              io.to(user.room).emit('message', formatMessage(botName, `${user.username} has left the chat`));
+
+            // Send users and room info
+            io.to(user.room).emit('roomUsers', {
+                room: user.room,
+                users: getRoomUsers(user.room)
+            });
         } // end if
     });
 });
