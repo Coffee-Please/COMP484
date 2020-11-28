@@ -11,9 +11,6 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-// SET STATIC FOLDER
-app.use(express.static(path.join(__dirname, 'public')));
-
 const botName = 'Room Bot';
 
 // When client connects, run socket.io
@@ -64,6 +61,14 @@ io.on('connection', socket => {
 });
 
 // SET PORT TO SEND DATA TO
-const PORT = 3000 || process.env.PORT;
+const PORT = process.env.PORT || 3000; // Heroku runs on available port, otherwise localhost fallback
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+//TODO: Add MongoDB
+
+// Setup heroku production environment
+if (process.env.NODE_ENV === 'production') {
+    // SET STATIC FOLDER
+    app.use(express.static(path.join(__dirname, 'public')));
+}
