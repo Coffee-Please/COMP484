@@ -72,3 +72,11 @@ if (process.env.NODE_ENV === 'production') {
     // SET STATIC FOLDER
     app.use(express.static(path.join(__dirname, 'public')));
 }
+
+// Setup heroku production environment
+if (PORT === 3000) {
+    // SET STATIC FOLDER
+    app.use(express.static(path.join(__dirname, 'public')));
+}
+
+
