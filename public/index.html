@@ -1,42 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="styles/style.css"/>
-		<title>484 Chatroom</title>
-	</head>
-	<body>
-		<div class="join-container">
-			<header class="join-header">
-				<h1><i class="fas fa-smile"></i> ChatRoom</h1>
-			</header>
-			<main class="join-main">
-				<form action="chat.html">
-					<div class="form-control">
-						<label for="username">Enter your username:</label>
-						<input
-							type="text"
-							name="username"
-							id="username"
-							placeholder="Enter username..."
-							required
-						/>
-					</div>
-					<div class="form-control">
-						<label for="room">Choose a Room:</label>
-						<select name="room" id="room">
-							<option value="JavaScript">JavaScript</option>
-							<option value="Python">Python</option>
-							<option value="PHP">PHP</option>
-							<option value="C#">C#</option>
-							<option value="Ruby">Ruby</option>
-							<option value="Java">Java</option>
-						</select>
-					</div>
-					<button type="submit" class="btn">Join Room</button>
-				</form>
-			</main>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="styles/style.css"/>
+        <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+        <title>484 Chatroom</title>
+    </head>
+    <body>
+        <header>
+             <img src="img/logo.png">
+        </header>
+	<main class="join-main">
+		<form action="chat.html">
+
+		<div class="form-control">
+		<label for="username">Enter your username:</label>
+		<input type="text" name="username" id="username" placeholder="Enter username..." minlength="1" maxlength="20" required/>
 		</div>
+
+		<div class="form-control">
+		<label for="room">Choose a Room:</label>
+		<select name="room" id="room">
+			<option value="Room 1">Room 1</option>
+			<option value="Room 2">Room 2</option>
+			<option value="Room 3">Room 3</option>
+			<option value="Room 4">Room 4</option>
+			<option value="Room 5">Room 5</option>
+			<option value="Room 6">Room 6</option>
+		</select>
+	        </div>
+
+		<button type="submit" class="btn">Join Room</button>
+		</form>
+	</main>
 	</body>
 </html>
