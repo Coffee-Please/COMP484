@@ -31,9 +31,9 @@ io.on('connection', socket => {
         io.to(user.room).emit('roomUsers', {
             room: user.room,
             users: getRoomUsers(user.room)
-        });
+        }); // end io
 
-    });
+    }); // end socket
 
     // Listen for chat Message
     socket.on('chatMessage', msg => {
@@ -41,7 +41,7 @@ io.on('connection', socket => {
 
         // Emit message on to the room the user is in
         io.to(user.room).emit('message', formatMessage(user.username, msg));
-    });
+    }); // end socket
 
     // This runs when the client disconnects
     socket.on('disconnect', () => {
@@ -55,14 +55,15 @@ io.on('connection', socket => {
             io.to(user.room).emit('roomUsers', {
                 room: user.room,
                 users: getRoomUsers(user.room)
-            });
+            }); // end io
         } // end if
-    });
-});
+    }); // end socket
+}); // end io
 
 // SET PORT TO SEND DATA TO
-const PORT = process.env.PORT || 3000; // Heroku runs on available port, otherwise localhost fallback
+const PORT = process.env.PORT || 3000; // Runs on available port, otherwise localhost fallback
 
+// Log which port the serveris running on too console
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 //TODO: Add MongoDB
@@ -73,7 +74,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, 'public')));
 }
 
-// Setup heroku production environment
+// Setup localhost test environment
 if (PORT === 3000) {
     // SET STATIC FOLDER
     app.use(express.static(path.join(__dirname, 'public')));
