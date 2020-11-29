@@ -1,9 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-
 :root {
-	--dark-color-a: #667aff;
-	--dark-color-b: #7386ff;
-	--light-color: #e6e9ff;
 	--success-color: #5cb85c;
 	--error-color: #d9534f;
 }
@@ -15,9 +10,10 @@
 }
 
 body {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Helvetica', sans-serif;
 	font-size: 16px;
-	background: var(--light-color);
+	background:  #ffffff;
+        filter: drop-shadow(0px 10px 10px #a9aba9);
 	margin: 20px;
 }
 
@@ -32,24 +28,24 @@ a {
 .btn {
 	cursor: pointer;
 	padding: 5px 15px;
-	background: var(--light-color);
-	color: var(--dark-color-a);
+	background: #d22030;
+	color: #ffffff;
 	border: 0;
 	font-size: 17px;
 }
 
-/* Chat Page */
+/* ChatRoom Page */
 
 .chat-container {
-	max-width: 1100px;
-	background: #fff;
+	max-width: 90%;
+	background: #ffffff;
 	margin: 30px auto;
 	overflow: hidden;
 }
 
 .chat-header {
-	background: var(--dark-color-a);
-	color: #fff;
+	background:  #d22030;
+	color: #ffffff;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	padding: 15px;
@@ -58,14 +54,25 @@ a {
 	justify-content: space-between;
 }
 
+.chat-header .btn {
+	background:  #ffffff;
+	color: #d22030;
+        text-align: center;
+	cursor: pointer;
+	padding: 5px 15px;
+	border: 0;
+	border-radius: 5px;
+	font-size: 17px;
+}
+
 .chat-main {
 	display: grid;
 	grid-template-columns: 1fr 3fr;
 }
 
 .chat-sidebar {
-	background: var(--dark-color-b);
-	color: #fff;
+	background: #ffffff;
+	color: #000000;
 	padding: 20px 20px 60px;
 	overflow-y: scroll;
 }
@@ -91,28 +98,33 @@ a {
 	overflow-y: scroll;
 }
 
+/* Message Text Box Background */
 .chat-messages .message {
 	padding: 10px;
 	margin-bottom: 15px;
-	background-color: var(--light-color);
+	background-color: #bec6c3;
 	border-radius: 5px;
 }
 
+/* Message Text Box Contents */
 .chat-messages .message .meta {
 	font-size: 15px;
 	font-weight: bold;
-	color: var(--dark-color-b);
+	color: #000000;
 	opacity: 0.7;
 	margin-bottom: 7px;
 }
 
+/* Message Time */
 .chat-messages .message .meta span {
-	color: #777;
+	color: #d22030;
 }
 
+/* Bottom Bar */
 .chat-form-container {
 	padding: 20px 30px;
-	background-color: var(--dark-color-a);
+	background-color: #ffffff;
+        border-top: 1px solid #bec6c3;
 }
 
 .chat-form-container form {
@@ -126,24 +138,26 @@ a {
 	flex: 1;
 }
 
-/* Join Page */
+/* Main Page */
+
 .join-container {
-	max-width: 500px;
+	max-width: 60%;
 	margin: 80px auto;
-	color: #fff;
+	color: #000000;
 }
 
 .join-header {
 	text-align: center;
 	padding: 20px;
-	background: var(--dark-color-a);
+	background: #d22030;
+        color: #ffffff;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 }
 
 .join-main {
 	padding: 30px 40px;
-	background: var(--dark-color-b);
+	background: #ffffff;
 }
 
 .join-main p {
@@ -176,6 +190,7 @@ a {
 .join-main .btn {
 	margin-top: 20px;
 	width: 100%;
+        border-radius: 5px;
 }
 
 @media (max-width: 700px) {
