@@ -1,3 +1,9 @@
+/* COMP 484 | Fall 2020                                 */
+/* Final Project: CSUN Chatroom                         */
+/* Authors: Brandon Dahl, Priya Singh                   */
+/* File: style.css                                      */
+/*======================================================*/
+
 :root {
 	--success-color: #5cb85c;
 	--error-color: #d9534f;
@@ -17,10 +23,12 @@ body {
 	margin: 20px;
 }
 
+/* Remove billet points from unordered list */
 ul {
 	list-style: none;
 }
 
+/* Remove underlined style for hyperlink */
 a {
 	text-decoration: none;
 }
@@ -34,7 +42,9 @@ a {
 	font-size: 17px;
 }
 
-/* ChatRoom Page */
+/*===============================================*/
+/* ChatRoom Page                                 */
+/*===============================================*/
 
 .chat-container {
 	max-width: 90%;
@@ -54,15 +64,16 @@ a {
 	justify-content: space-between;
 }
 
+/* Leave Room Button */
 .chat-header .btn {
-	background:  #ffffff;
+	background: #ffffff;
 	color: #d22030;
-        text-align: center;
 	cursor: pointer;
-	padding: 5px 15px;
-	border: 0;
+        padding: 10px;
+	border: none;
 	border-radius: 5px;
-	font-size: 17px;
+	font-size: 20px;
+	margin: 10px;
 }
 
 .chat-main {
@@ -70,6 +81,7 @@ a {
 	grid-template-columns: 1fr 3fr;
 }
 
+/* Chatroom sidebar box */
 .chat-sidebar {
 	background: #ffffff;
 	color: #000000;
@@ -77,21 +89,23 @@ a {
 	overflow-y: scroll;
 }
 
-.chat-sidebar h2 {
-	font-size: 20px;
-	background: rgba(0, 0, 0, 0.1);
-	padding: 10px;
-	margin-bottom: 20px;
+.chat-sidebar a {
+        height: 100%;
+        width: 100%;
 }
 
+/* User List Title */
 .chat-sidebar h3 {
-	margin-bottom: 15px;
+	margin-bottom: 10px;
+	margin-top: 20px;
 }
 
+/* Sidebar User List */
 .chat-sidebar ul li {
 	padding: 10px 0;
 }
 
+/* Message Area */
 .chat-messages {
 	padding: 30px;
 	max-height: 500px;
@@ -138,7 +152,9 @@ a {
 	flex: 1;
 }
 
-/* Main Page */
+/*===============================================*/
+/* Main Page                                     */
+/*===============================================*/
 
 .join-container {
 	max-width: 60%;
