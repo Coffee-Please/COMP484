@@ -1,0 +1,48 @@
+/* COMP 484 | Fall 2020                                 */
+/* Final Project: CSUN Chatroom                         */
+/* Authors: Brandon Dahl, Priya Singh                   */
+/* File: root.css                                       */
+/*======================================================*/
+
+* {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+}
+
+/* Body styling */
+body {
+        font-family: 'Helvetica', sans-serif;
+        font-size: 1em;
+        background:  #ffffff;
+        width: 98%;
+        height: 98%;
+}
+
+/* Footer styling */
+footer {
+        font-family: 'Helvetica', sans-serif;
+        font-size: 1em;
+        text-align: center;
+        width: 100%;
+        clear: both;
+	position: fixed;
+	bottom: 0;
+        padding: 1em;
+        border-top: 4px solid black;
+}
+
+/* Remove bullet points from unordered list */
+ul {
+        list-style: none;
+}
+
+/* Button Styling */
+.btn {
+        cursor: pointer;
+        padding: 5px 15px;
+        background: #d22030;
+        color: #ffffff;
+        border: none;
+        font-size: 1em;
+}
