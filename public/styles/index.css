@@ -8,6 +8,10 @@
 /* Main Page                                     */
 /*===============================================*/
 
+.resheader {
+	display: none;
+}
+
 .join-main {
 	max-width: 50%;
 	margin: 80px auto;
@@ -58,5 +62,13 @@
 	/* Adjust join form */
 	.join-main {
 		max-width: 90vw;
+	}
+
+	.resheader {
+		display: contents;
+	}
+
+	.mainheader {
+		display: none;
 	}
 }
