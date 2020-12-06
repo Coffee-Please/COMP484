@@ -45,8 +45,10 @@
 	width: 100%;
 }
 
+/* Join Room Button */
 .join-main .btn {
 	margin-top: 20px;
 	width: 50%;
+	height: 2em;
         border-radius: 5px;
 }

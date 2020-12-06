@@ -44,9 +44,7 @@
 /* Leave Room Button */
 .chat-sidebar .btn {
         padding: 10px;
-        border: none;
         border-radius: 5px;
-        font-size: 1em;
         margin: 10px;
 	text-decoration: none;
 }
