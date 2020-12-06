@@ -15,16 +15,7 @@
         margin: 2% auto;
         filter: drop-shadow(0px 10px 10px #a9aba9);
         overflow: hidden;
-}
-
-/* Top bar of chat box */
-.chat-header {
-        background:  #d22030;
-        color: #ffffff;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-        padding: 1em;
-        text-align: center;
+	border-radius: 5px;
 }
 
 /* Chatroom sidebar and message container  */
@@ -40,6 +31,7 @@
         color: #000000;
         padding: 20px 20px 60px;
         overflow-y: scroll;
+	border-right: 1px solid #bec6c3;
 }
 
 /* Leave Room Button */
@@ -120,7 +112,7 @@
                 display: block;
         }
 
-/* TODO: Small Screen Format: If screen is small, make sidebar disappear but keep Leave Button */
+/* TODO: Small Screen Format: Keep Leave Button */
         .chat-sidebar {
                 display: none;
         }
