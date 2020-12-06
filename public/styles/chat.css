@@ -46,6 +46,8 @@
         padding: 10px;
         margin: 10px;
 	text-decoration: none;
+	width: auto;
+	font-size: auto;
 }
 
 /* User List Title */
