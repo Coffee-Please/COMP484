@@ -17,7 +17,7 @@ body {
         background:  #ffffff;
         width: 98%;
         height: 98%;
-	margin-bottom: 2em;
+	margin: auto;
 }
 
 /* Footer styling */
@@ -26,11 +26,10 @@ footer {
         font-family: 'Helvetica', sans-serif;
         font-size: 1em;
         text-align: center;
-        width: 100%;
         border-top: 4px solid black;
 	padding-top: 1em;
 	padding-bottom: 1em;
-	margin: 1em;
+	margin: auto;
 }
 
 /* Header Styling */
