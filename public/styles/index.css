@@ -1,0 +1,53 @@
+/* COMP 484 | Fall 2020                                 */
+/* Final Project: CSUN Chatroom                         */
+/* Authors: Brandon Dahl, Priya Singh                   */
+/* File: index.css                                      */
+/*======================================================*/
+
+/*===============================================*/
+/* Main Page                                     */
+/*===============================================*/
+
+.join-main {
+	max-width: 50%;
+	margin: 80px auto;
+	color: #000000;
+	padding: 30px 40px;
+	background: #ffffff;
+	text-align: center;
+        filter: drop-shadow(0px 10px 10px #a9aba9);
+}
+
+.join-main p {
+	margin-bottom: 20px;
+}
+
+.join-main .form-control {
+	margin-bottom: 20px;
+}
+
+.join-main label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.join-main input[type='text'] {
+	font-size: 16px;
+	padding: 5px;
+	height: 40px;
+	width: 100%;
+}
+
+.join-main select {
+	font-size: 1em;
+	padding: 5px;
+	height: 40px;
+	width: 100%;
+}
+
+/* Join Room Button */
+.join-main .btn {
+	margin-top: 20px;
+	width: 50%;
+	height: 2em;
+}
