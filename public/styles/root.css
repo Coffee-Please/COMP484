@@ -17,7 +17,7 @@ body {
         background:  #ffffff;
         width: 98%;
         height: 98%;
-	margin-bottom: 2em;
+	margin: auto;
 }
 
 /* Footer styling */
@@ -26,11 +26,11 @@ footer {
         font-family: 'Helvetica', sans-serif;
         font-size: 1em;
         text-align: center;
-        width: 100%;
-        border-top: 4px solid black;
+        border-top: 4px solid #000000;
 	padding-top: 1em;
 	padding-bottom: 1em;
-	margin: 1em;
+	margin: auto;
+	margin-top: 2em;
 }
 
 /* Header Styling */
@@ -44,6 +44,12 @@ header {
 /* Heading 1 Styling using Google Font */
 h1 {
 	font-family: 'Averia Serif Libre', cursive;
+}
+
+/* Heading 2 Styling using Google Font */
+h2 {
+	padding: 1em;
+	border-bottom: 1px solid #bec6c3;
 }
 
 /* Remove bullet points from unordered list */
