@@ -1,20 +1,27 @@
+//
+// COMP 484 | Spring 2020
+// server.js | Brandon Dahl, Priya Singh
+// Beginning File, Backend
+//======================================================================
+
 // REQUIRED PACKAGES/FILES
-const path = require('path');
+const path = require('path'); // NodeJS - Handle and transforms filepaths
 const http = require('http');
-const express = require('express');
-const socketio = require('socket.io');
+const express = require('express'); // use express framework
+const socketio = require('socket.io'); // use socket.io framework
 const formatMessage = require('./utils/messages');
 const {userJoin, getCurrentUser, userLeave, getRoomUsers} = require('./utils/users');
 
 // VARIABLES
-const app = express();
-const server = http.createServer(app);
-const io = socketio(server);
+const app = express(); // create an express app
+const server = http.createServer(app); // create the server to use for socket.io
+const io = socketio(server); // use socket.io with server
 
-const botName = 'Room Bot';
+const botName = 'Room Bot'; // TODO: Change static name to room name dynamically
 
-// When client connects, run socket.io
+// When client connects, run socket
 io.on('connection', socket => {
+
     socket.on('joinRoom', ({username, room}) => {
 
         const user = userJoin(socket.id, username, room);
@@ -68,15 +75,15 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 //TODO: Add MongoDB
 
-// Setup heroku production environment
+// Access heroku production environment
 if (process.env.NODE_ENV === 'production') {
-    // SET STATIC FOLDER
+    // Set code folder
     app.use(express.static(path.join(__dirname, 'public')));
 }
 
-// Setup localhost test environment
+// Access localhost environment
 if (PORT === 3000) {
-    // SET STATIC FOLDER
+    // Set code folder
     app.use(express.static(path.join(__dirname, 'public')));
 }
 
