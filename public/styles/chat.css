@@ -46,7 +46,7 @@
         padding: 10px;
         border: none;
         border-radius: 5px;
-        font-size: 1.5em;
+        font-size: 1em;
         margin: 10px;
 	text-decoration: none;
 }
@@ -107,7 +107,7 @@
 .chat-form-container input {
         font-size: 1em;
         padding: 5px;
-        height: 1em;
+        height: 2em;
         flex: 1;
 }
 
