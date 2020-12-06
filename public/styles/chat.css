@@ -62,6 +62,13 @@
         overflow-y: scroll;
 }
 
+/* Contains H2, RESLeave Button, Message Display  */
+.chat-form-message-area .btn {
+	display: none;
+	float: right;
+	margin: 1em;
+}
+
 /* Message Text Box Background */
 .chat-messages .message {
         padding: 10px;
@@ -119,6 +126,10 @@
 
 	.chat-form-container {
 		padding: 0;
+	}
+
+	.chat-form-message-area .btn {
+		display: block;
 	}
 }
 
