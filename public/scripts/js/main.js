@@ -26,6 +26,9 @@ socket.on('roomUsers', ({room, users}) => {
 // Message from server
 socket.on('message', message => {
     console.log(message);
+    
+    // Convert UTC time to client time
+    message.time = new Date(message.time).toLocaleTimeString([], {timeStyle: "short"});
     outputMessage(message);
 
    // Scroll down when a message is sent by user
