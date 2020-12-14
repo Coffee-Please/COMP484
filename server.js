@@ -10,8 +10,8 @@ const path = require('path'); // NodeJS - Handle and transforms filepaths
 const http = require('http');
 const express = require('express'); // use express framework
 const socketio = require('socket.io'); // use socket.io framework
-const formatMessage = require('./utils/messages');
-const {userJoin, getCurrentUser, userLeave, getRoomUsers} = require('./utils/users');
+const formatMessage = require('./public/scripts/messages');
+const {userJoin, getCurrentUser, userLeave, getRoomUsers} = require('./public/scripts/users');
 
 // VARIABLES
 const app = express(); // create an express app
