@@ -4,17 +4,13 @@
 /* File: root.css                                       */
 /*======================================================*/
 
-<<<<<<< HEAD
 /* Universal Styling */
-=======
->>>>>>> cea790cf8f3f5ae62d8ab62fd45ac736e2012504
 * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
 }
 
-<<<<<<< HEAD
 /* Nav Bar Styling */
 nav {
 	background-color: #d22030;
@@ -40,8 +36,6 @@ nav a:hover {
 	background-color: #000000;
 }
 
-=======
->>>>>>> cea790cf8f3f5ae62d8ab62fd45ac736e2012504
 /* Body styling */
 body {
         font-family: 'Helvetica', sans-serif;
@@ -68,28 +62,18 @@ footer {
 /* Header Styling */
 header {
 	text-align: center;
-<<<<<<< HEAD
-=======
         font-family: 'Helvetica', sans-serif;
         font-size: 1em;
->>>>>>> cea790cf8f3f5ae62d8ab62fd45ac736e2012504
 	padding: 2em;
 }
 
 /* Heading 1 Styling using Google Font */
 h1 {
-<<<<<<< HEAD
 	font-family: 'Averia Sans Libre', cursive;
 	padding: 2em;
 }
 
 /* Heading 2 Styling*/
-=======
-	font-family: 'Averia Serif Libre', cursive;
-}
-
-/* Heading 2 Styling using Google Font */
->>>>>>> cea790cf8f3f5ae62d8ab62fd45ac736e2012504
 h2 {
 	padding: 1em;
 	border-bottom: 1px solid #bec6c3;
