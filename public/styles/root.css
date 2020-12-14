@@ -4,10 +4,36 @@
 /* File: root.css                                       */
 /*======================================================*/
 
+/* Universal Styling */
 * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
+}
+
+/* Nav Bar Styling */
+nav {
+	background-color: #d22030;
+	overflow: hidden;
+	padding: 1em;
+	width: 75%;
+	margin: auto;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+/* Nav Link Styling */
+nav a {
+	color: #ffffff;
+	text-align: center;
+	padding: 1em;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/* Nav Link Styling On Mouse Hover */
+nav a:hover {
+	background-color: #000000;
 }
 
 /* Body styling */
@@ -36,17 +62,16 @@ footer {
 /* Header Styling */
 header {
 	text-align: center;
-        font-family: 'Helvetica', sans-serif;
-        font-size: 1em;
 	padding: 2em;
 }
 
 /* Heading 1 Styling using Google Font */
 h1 {
-	font-family: 'Averia Serif Libre', cursive;
+	font-family: 'Averia Sans Libre', cursive;
+	padding: 2em;
 }
 
-/* Heading 2 Styling using Google Font */
+/* Heading 2 Styling*/
 h2 {
 	padding: 1em;
 	border-bottom: 1px solid #bec6c3;
