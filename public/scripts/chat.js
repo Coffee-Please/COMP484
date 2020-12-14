@@ -26,7 +26,7 @@ socket.on('roomUsers', ({room, users}) => {
 // Message from server
 socket.on('message', message => {
     console.log(message);
-    
+
     // Convert UTC time to client time
     message.time = new Date(message.time).toLocaleTimeString([], {timeStyle: "short"});
     outputMessage(message);
@@ -54,12 +54,13 @@ chatForm.addEventListener('submit', (e) => {
 
 // Output message to DOM
 function outputMessage(message) {
+	// Create div in HTML to hold message
     const div = document.createElement('div');
     div.classList.add('message');
-    div.innerHTML = `<p class="meta">${message.username} <span>${message.time}</span></p>
-    <p class="text">
-        ${message.text}
-    </p>`;
+    div.innerHTML = `<p class="meta">${message.username}
+	<span>${message.time}</span>
+	</p>
+	<p class="text">${message.text}</p>`;
     document.querySelector('.chat-messages').appendChild(div);
 } // end outputMessages
 

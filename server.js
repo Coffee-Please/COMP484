@@ -1,7 +1,8 @@
 //
 // COMP 484 | Spring 2020
 // server.js | Brandon Dahl, Priya Singh
-// Beginning File, Backend
+//
+// Runs on start to set all prerequisites
 //======================================================================
 
 // REQUIRED PACKAGES/FILES
@@ -16,8 +17,7 @@ const {userJoin, getCurrentUser, userLeave, getRoomUsers} = require('./utils/use
 const app = express(); // create an express app
 const server = http.createServer(app); // create the server to use for socket.io
 const io = socketio(server); // use socket.io with server
-
-const botName = 'Room Bot'; // TODO: Change static name to room name dynamically
+var botName; // Declare bot
 
 // When client connects, run socket
 io.on('connection', socket => {
@@ -25,6 +25,7 @@ io.on('connection', socket => {
     socket.on('joinRoom', ({username, room}) => {
 
         const user = userJoin(socket.id, username, room);
+	botName = `${user.room} Bot`; // Set Bot to have the room name
 
         socket.join(user.room);
 

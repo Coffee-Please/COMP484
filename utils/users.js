@@ -33,6 +33,7 @@ function getRoomUsers(room) {
     return users.filter(user => user.room === room);
 } // end getRoomUsers
 
+// Send functions to be used
 module.exports = {
     userJoin,
     getCurrentUser,
