@@ -24,7 +24,7 @@ io.on('connection', socket => {
 
     socket.on('joinRoom', ({username, room}) => {
 
-        const user = userJoin(socket.id, username, room);
+        const user = userJoin(socket.id, username, room); // Set the user
 	botName = `${user.room} Bot`; // Set Bot to have the room name
 
         socket.join(user.room);
@@ -71,10 +71,8 @@ io.on('connection', socket => {
 // SET PORT TO SEND DATA TO
 const PORT = process.env.PORT || 3000; // Runs on available port, otherwise localhost fallback
 
-// Log which port the serveris running on too console
+// Log which port the server is running on too console
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-//TODO: Add MongoDB
 
 // Access heroku production environment
 if (process.env.NODE_ENV === 'production') {
