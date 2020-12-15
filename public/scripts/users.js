@@ -1,3 +1,11 @@
+//
+// COMP 484 | Spring 2020
+// users.js | Brandon Dahl, Priya Singh
+//
+// Manages users in chatroom
+//======================================================================
+
+// Array to store current users in
 const users = [];
 
 // Join user to chat
@@ -14,6 +22,7 @@ function userJoin(id, username, room) {
 function getCurrentUser(id) {
     return users.find(user => user.id === id);
 } // end getCurrentUser
+
 
 // User leaves the chat
 function userLeave(id) {
@@ -33,6 +42,8 @@ function getRoomUsers(room) {
     return users.filter(user => user.room === room);
 } // end getRoomUsers
 
+
+// Send functions to be used
 module.exports = {
     userJoin,
     getCurrentUser,
