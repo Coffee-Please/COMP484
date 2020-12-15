@@ -59,7 +59,7 @@ IO.on('connection', socket => {
 
 	// When the user joins the room
 	socket.on('joinRoom', ({username, room}) => {
-        	const USER = USERS.userJoin(socket.id, username, room); // Set the user who just joined and the room they joined
+        	const USER = USERS.addUser(socket.id, username, room); // Set the user who just joined and the room they joined
 
 		// Send the user to the room
         	socket.join(USER.room);
