@@ -18,10 +18,23 @@ SOCKET.emit('joinRoom', {username, room});
 // Get room and users
 SOCKET.on('roomUsers', ({room, users}) => {
 	// Add the Room name to the chat box
-	 document.getElementById('room-name').innerHTML = room;
+	document.getElementById('room-name').innerHTML = room;
 
-	// Add users to the Users list
-	 document.getElementById('users').innerHTML = `${users.map(user => `<li>${user.username}</li>`).join('')}`;
+	// Create a holder for the new user list
+	var userList = [];
+
+	// Go through the users and add them to the userList
+	users.forEach(function (user) {
+
+		// Format the new user
+		var newItem = `<li>${user.username}</li>`;
+
+		// Add to the list
+		return userList.push(newItem);
+	}); // end users
+
+	// Display userList in sidebar
+	 document.getElementById('users').innerHTML = userList.join('');
 }); // end socket
 
 
