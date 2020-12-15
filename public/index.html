@@ -1,54 +1,72 @@
+<!--
+ COMP 484 | Fall 2020
+ Brandon Dahl, Priya Singh
+ File: index.html
+-->
+
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-	<meta charset="UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<link rel="stylesheet" href="styles/root.css"/>
-	<link rel="stylesheet" href="styles/index.css"/>
-	<link href="https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:wght@700&display=swap" rel="stylesheet"> 
-        <link rel="icon" type="image/x-icon" href="img/favicon.ico"/>
-        <title>484 Chatroom</title>
-    </head>
-    <body>
-        <header>
-		<div class="header-title">
-			<h1 class="mainheader">COMP 484 | Web Enginnering</h1>
-			<h1 class="resheader">COMP 484 <br>Web Enginnering</h1>
-		</div>
+	<head>
+		<!-- Metadata -->
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-		<nav>
-			<a class="home" href="index.html">Home</a>
-			<a class="about" href="about.html">About</a>
-		</nav>
-        </header>
+		<!-- Stylesheets and Favicon -->
+		<link rel="stylesheet" type="text/css" href="styles/root.css"/>
+		<link rel="stylesheet" type="text/css" href="styles/index.css"/>
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:wght@700&display=swap"> 
+	        <link rel="icon" type="image/x-icon" href="img/favicon.ico"/>
 
-	<main class="join-main">
-		<form action="chat.html">
+		<!-- Website Title -->
+	        <title>484 Chatroom</title>
+	</head>
 
-		<div class="form-control">
-			<label for="username">Enter your username:</label>
-			<input name="username" id="username" type="text" placeholder="Enter username..." minlength="1" maxlength="20" required/>
-		</div>
+	<body>
+		<header>
+			<!-- Website Title -->
+			<div class="header-title">
+				<h1 class="mainheader">COMP 484 | Web Enginnering</h1>
+				<h1 class="resheader">COMP 484 <br>Web Enginnering</h1>
+			</div>
 
-		<div class="form-control">
-			<label for="room">Choose a Room:</label>
-			<select name="room" id="room">
-				<option value="Room 1">Room 1</option>
-				<option value="Room 2">Room 2</option>
-				<option value="Room 3">Room 3</option>
-				<option value="Room 4">Room 4</option>
-				<option value="Room 5">Room 5</option>
-				<option value="Room 6">Room 6</option>
-			</select>
-	        </div>
+			<!-- Navigation Bar -->
+			<nav>
+				<a class="home" href="index.html">Home</a>
+				<a class="about" href="about.html">About</a>
+			</nav>
+		</header>
 
-		<button class="btn" type="submit">Join Room</button>
-		</form>
-	</main>
+		<main class="join-main">
+			<form action="chat.html">
+
+			<!-- User Name Input -->
+			<div class="form-control">
+				<label for="username">Enter your username:</label>
+				<input name="username" id="username" type="text" placeholder="Enter username..." minlength="1" maxlength="20" required/>
+			</div>
+
+			<!-- Choose Room List -->
+			<div class="form-control">
+				<label for="room">Choose a Room:</label>
+				<select name="room" id="room">
+					<option value="Room 1">Room 1</option>
+					<option value="Room 2">Room 2</option>
+					<option value="Room 3">Room 3</option>
+					<option value="Room 4">Room 4</option>
+					<option value="Room 5">Room 5</option>
+					<option value="Room 6">Room 6</option>
+				</select>
+		        </div>
+
+			<!-- Join Room Button -->
+			<button class="btn" type="submit">Join Room</button>
+			</form>
+		</main>
 	</body>
 
-        <footer>
+	<footer>
+		<!-- Copyright Disclaimer -->
 		<p>&copy;2020 All rights reserved.</p>
-        </footer>
-
+	</footer>
 </html>
