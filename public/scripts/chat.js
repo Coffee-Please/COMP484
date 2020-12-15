@@ -6,11 +6,9 @@
 //======================================================================
 
 
-// Variables
+// VARIABLES
 const socket = io(); // Use socket functions
-
-// Get username and room from URL
-const {username, room} = Qs.parse(location.search, {ignoreQueryPrefix: true});  // Ignore special characters in beginnng of query string target
+const {username, room} = Qs.parse(location.search, {ignoreQueryPrefix: true}); // Get username and room from URL, ignore special characters
 
 
 // Join Chat room
@@ -41,21 +39,21 @@ socket.on('message', message => {
 
 
 // Message submit handler, Listens when the user clicks submit
-document.getElementById('chat-form').addEventListener('submit', (e) => {
+document.getElementById('chat-form').addEventListener('submit', (element) => {
 	// prevent submission to file (default behavior)
-	e.preventDefault();
+	element.preventDefault();
 
 	// Store inputted message
-	const msg = e.target.elements.msg.value;
+	const msg = element.target.elements.msg.value;
 
 	// Emit message to the server
 	socket.emit('chatMessage', msg);
 
 	// Clear input box after message is sent
-	e.target.elements.msg.value = '';
+	element.target.elements.msg.value = '';
 
 	// Focus cursor in input box
-	e.target.elements.msg.focus();
+	element.target.elements.msg.focus();
 }); // end addEventListener
 
 
@@ -68,10 +66,7 @@ function outputMessage(message) {
 	div.classList.add('message');
 
 	// Inject message into new div with HTML
-	div.innerHTML = `<p class="meta">${message.username}
-		<span>${message.time}</span>
-		</p>
-		<p class="text">${message.text}</p>`;
+	div.innerHTML = `<p class="meta">${message.username}<span> ${message.time}</span></p><p class="text">${message.text}</p>`;
 
 	// Add message to the end of the meaasge list
 	document.querySelector('.chat-messages').appendChild(div);
