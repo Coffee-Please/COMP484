@@ -2,13 +2,13 @@
   "name": "Comp484FinalProject",
   "version": "1.0.0",
   "description": "Asynchronous Chatrooms",
-  "main": "server.js",
+  "main": "server/scripts/server.js",
   "scripts": {
-    "start": "node server",
+    "start": "node server/scripts/server",
     "build": "npm run public",
     "install-public": "npm install",
     "heroku-postbuild": "npm run install-public && npm run build",
-    "dev": "nodemon server"
+    "dev": "nodemon server/scripts/server"
   },
   "repository": {
     "type": "git",

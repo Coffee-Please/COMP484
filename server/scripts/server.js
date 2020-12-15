@@ -8,8 +8,8 @@
 
 
 // REQUIRED PACKAGES, FILES AND CONST VARS
-const FORMAT = require('./public/scripts/messages'); // Formatting for messages from messages.js
-const USERS = require('./public/scripts/users'); // Get function from users.js
+const FORMAT = require('./messages'); // Formatting for messages from messages.js
+const USERS = require('./users'); // Get function from users.js
 const PATH = require('path'); // NodeJS - Handle and transforms filepaths
 const HTTP = require('http'); // NodeJS - Allow transfer of data over HTTP
 const EXPRESS = require('express'); // use express framework
@@ -27,7 +27,7 @@ SERVER.listen(PORT);
 // Access heroku production environment or localhost
 if (ENV === 'production' || PORT === 3000) {
 	// Set code folder
-	APP.use(EXPRESS.static(PATH.join(__dirname, 'public')));
+	APP.use(EXPRESS.static(PATH.join(__dirname, '../../public')));
 } // end if
 
 

@@ -2,7 +2,7 @@
 // COMP 484 | Spring 2020
 // users.js | Brandon Dahl, Priya Singh
 //
-// Manages users in chatroom
+// Manages users in chatroom on server side
 //======================================================================
 
 
@@ -34,7 +34,10 @@ function getCurrentUser(id) {
 	'use strict';
 
 	// Find the user in the current user array using the socket id
-	const found =  users.find(user => user.id === id);
+	const found =  users.find(function (user) {
+		// Return the user
+		return user.id === id
+	}); // end users
 
 	// return the user found
 	return found;
@@ -46,12 +49,15 @@ function removeUser(id) {
 	'use strict';
 
 	// Find user that left using the socket id
-	const found = users.findIndex(user => user.id === id);
+	const found = users.findIndex(function (user) {
+		// Return the user
+		return user.id === id;
+	}); // end users
 
 	// If user is found
 	if(found !== -1) {
 		// Remove the user from the array
-		const removed = users.splice(found, 1)[0]; 
+		const removed = users.splice(found, 1)[0];
 
 		// return the new current user array
 		return removed;
@@ -64,7 +70,10 @@ function getRoomUsers(room) {
 	'use strict';
 
 	// Find all the user in the current room
-	const found = users.filter(user => user.room === room);
+	const found = users.filter(function (user) {
+		// Return user in the room
+		return user.room === room;
+	}); // end users
 
 	// Return the users found
 	return found;
