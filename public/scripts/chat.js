@@ -8,14 +8,63 @@
 
 // VARIABLES
 const SOCKET = io(); // Use socket functions
-const {username, room} = Qs.parse(location.search, {ignoreQueryPrefix: true}); // Get username and room from URL, ignore special characters
+const userInfo = Qs.parse(location.search, {ignoreQueryPrefix: true}); // Get username and room from URL, ignore special characters
 
 
-// Join Chat room
-SOCKET.emit('joinRoom', {username, room});
+// The user joins the chatroom
+SOCKET.emit('joinRoom', {username : userInfo.username, room : userInfo.room});
 
 
-// Get room and users
+// Message submit handler, Listens when the user clicks submit
+document.getElementById('chat-form').addEventListener('submit', (event) => {
+	'use strict';
+
+	// prevent submission to file (default behavior)
+	event.preventDefault();
+
+	// Get the user input
+	var userInput = event.target.elements.msg;
+
+	// Store inputted message
+	const msg = userInput.value;
+
+	// Send message to room
+	SOCKET.emit('chatMessage', msg);
+
+	// Clear input box after message is sent
+	userInput.value = '';
+
+	// Activate cursor in input box
+	userInput.focus();
+}); // end addEventListener
+
+
+// Message from server
+SOCKET.on('message', message => {
+	const div = document.createElement('div'); // Create div in HTML to hold the user inputted message
+	const messageList = document.querySelector('.chat-messages'); // Get the list of messages in the chatroom
+
+	// Convert UTC time to client time
+	message.time = new Date(message.time).toLocaleTimeString([], {timeStyle: "short"});
+
+	// Format message in HTML
+	var messageFormat = `<p class="meta">${message.username}<span> ${message.time}</span></p><p class="text">${message.text}</p>`;
+
+	// Add div to 'message' class
+	div.classList.add('message');
+
+	// Inject message into new div
+	div.innerHTML = messageFormat;
+
+	// Add message to the end of the message list
+	messageList.appendChild(div);
+
+	// Scroll down when a message is sent by user
+	messageList.scrollTop =  messageList.scrollHeight;
+}); // end socket
+
+
+// When we need to display the users in the room
 SOCKET.on('roomUsers', ({room, users}) => {
 	// Add the Room name to the chat box
 	document.getElementById('room-name').innerHTML = room;
@@ -36,49 +85,6 @@ SOCKET.on('roomUsers', ({room, users}) => {
 	// Display userList in sidebar
 	 document.getElementById('users').innerHTML = userList.join('');
 }); // end socket
-
-
-// Message from server
-SOCKET.on('message', message => {
-	// Convert UTC time to client time
-	message.time = new Date(message.time).toLocaleTimeString([], {timeStyle: "short"});
-
-	// Create div in HTML to hold message
-	const div = document.createElement('div');
-
-	// Add div to 'message' class
-	div.classList.add('message');
-
-	// Inject message into new div with HTML
-	div.innerHTML = `<p class="meta">${message.username}<span> ${message.time}</span></p><p class="text">${message.text}</p>`;
-
-	// Add message to the end of the meaasge list
-	document.querySelector('.chat-messages').appendChild(div);
-
-	// Scroll down when a message is sent by user
-	 document.querySelector('.chat-messages').scrollTop =  document.querySelector('.chat-messages').scrollHeight;
-}); // end socket
-
-
-// Message submit handler, Listens when the user clicks submit
-document.getElementById('chat-form').addEventListener('submit', (element) => {
-	'use strict';
-
-	// prevent submission to file (default behavior)
-	element.preventDefault();
-
-	// Store inputted message
-	const msg = element.target.elements.msg.value;
-
-	// Emit message to the server
-	SOCKET.emit('chatMessage', msg);
-
-	// Clear input box after message is sent
-	element.target.elements.msg.value = '';
-
-	// Focus cursor in input box
-	element.target.elements.msg.focus();
-}); // end addEventListener
 
 
 // Redirect user to main page after they leave the room
