@@ -10,46 +10,60 @@ const users = [];
 
 // Join user to chat
 function userJoin(id, username, room) {
+	'use strict';
+
+	// Create a user object
 	const user = {
 		id,
 		username,
 		room
 	}; // end user
 
+	// Add the user to the array of current users
 	users.push(user);
 
+	// Return the user
 	return user;
 } // end userJoin
 
 
 // Get the current user
 function getCurrentUser(id) {
+	'use strict';
 
-	return users.find(user => user.id === id);
+	// Find the user in the current user array using the socket id
+	const found =  users.find(user => user.id === id);
+
+	// return the user found
+	return found;
 } // end getCurrentUser
 
 
 // User leaves the chat
 function userLeave(id) {
-	// Find user that left
-	const index = users.findIndex(user => user.id === id);
+	'use strict';
+
+	// Find user that left using the socket id
+	const found = users.findIndex(user => user.id === id);
 
 	// If user is found, remove from array
-	if(index !== -1) {
-		// return the user
-		return users.splice(index, 1)[0];
+	if(found !== -1) {
+		// return the new current user array
+		return users.splice(found, 1)[0];
 	} // end if
 } // end userLeave
 
 
 // Get room users
 function getRoomUsers(room) {
-	
+	'use strict';
+
+	// Find all the user in the current room
 	return users.filter(user => user.room === room);
 } // end getRoomUsers
 
 
-// Send functions to be used
+// Send functions to be used by other js files
 module.exports = {
 	userJoin,
 	getCurrentUser,

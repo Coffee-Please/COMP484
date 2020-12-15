@@ -21,8 +21,8 @@ const PORT = process.env.PORT || 3000; // Run server on available port, otherwis
 const ENV = process.env.NODE_ENV; // Set available port
 
 
-// Check which port the server is running on to console
-SERVER.listen(PORT, () => console.log(`Port: ${PORT}`));
+// Create the server running on the available port
+SERVER.listen(PORT);
 
 // Access heroku production environment or localhost
 if (ENV === 'production' || PORT === 3000) {
