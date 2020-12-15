@@ -2,86 +2,75 @@
 // COMP 484 | Spring 2020
 // server.js | Brandon Dahl, Priya Singh
 //
-// Runs on start to set all prerequisites
+// Sets app and socketio function handlers and vars
+// for the chat room
 //======================================================================
 
-// REQUIRED PACKAGES/FILES
-const path = require('path'); // NodeJS - Handle and transforms filepaths
-const http = require('http');
-const express = require('express'); // use express framework
-const socketio = require('socket.io'); // use socket.io framework
-const formatMessage = require('./public/scripts/messages');
-const {userJoin, getCurrentUser, userLeave, getRoomUsers} = require('./public/scripts/users');
 
-// CONST VARIABLES
-const app = express(); // create an express app
-const server = http.createServer(app); // create the server to use for socket.io
-const io = socketio(server); // use socket.io with server
+// REQUIRED PACKAGES, FILES AND CONST VARS
+const FORMAT = require('./public/scripts/messages'); // Formatting for messages from messages.js
+const USERS = require('./public/scripts/users'); // Get function from users.js
+const PATH = require('path'); // NodeJS - Handle and transforms filepaths
+const HTTP = require('http'); // NodeJS - Allow transfer of data over HTTP
+const EXPRESS = require('express'); // use express framework
+const SOCKETIO = require('socket.io'); // use socket.io framework
+const APP = EXPRESS(); // create an express app
+const SERVER = HTTP.createServer(APP); // create the server to use for socket.io
+const IO = SOCKETIO(SERVER); // use socket.io with server
+const PORT = process.env.PORT || 3000; // Run server on available port, otherwise localhost fallback
+const ENV = process.env.NODE_ENV; // Set available port
+
+
+// Check which port the server is running on to console
+SERVER.listen(PORT, () => console.log(`Port: ${PORT}`));
+
+// Access heroku production environment or localhost
+if (ENV === 'production' || PORT === 3000) {
+	// Set code folder
+	APP.use(EXPRESS.static(PATH.join(__dirname, 'public')));
+} // end if
 
 
 // When client connects, run socket
-io.on('connection', socket => {
-
-	socket.on('joinRoom', ({username, room}) => {
-
-        	const user = userJoin(socket.id, username, room); // Set the user info
-
-        	socket.join(user.room); // Send the user to the room
-
-        	// When the user enters the room, have bot say welcome
-        	socket.emit('message', formatMessage(`${user.room} Bot`, `Welcome to ${user.room}`));
-
-       		// When a user joind the room, announce it
-        	socket.broadcast.to(user.room).emit('message', formatMessage(`${user.room} Bot`, `${user.username} has joined the chat`));
-
-        	// Send users and room info
-        	io.to(user.room).emit('roomUsers', {
-            		room: user.room,
-            		users: getRoomUsers(user.room)
-        	}); // end io
-	}); // end socket
-
-	// Listen for chat Message
+IO.on('connection', socket => {
+	// When a message is sent by the user
 	socket.on('chatMessage', msg => {
-		const user = getCurrentUser(socket.id);
+		const USER = USERS.getCurrentUser(socket.id); // Get the current user
 
-		// Emit message on to the room the user is in
-		io.to(user.room).emit('message', formatMessage(user.username, msg));
+		// Emit message to the room the user is in
+		IO.to(USER.room).emit('message', FORMAT(USER.username, msg));
 	}); // end socket
 
-	// This runs when the client disconnects
+
+	// When the user leaves the chatroom
 	socket.on('disconnect', () => {
-		const user = userLeave(socket.id);
+		const USER = USERS.userLeave(socket.id); // Get the current user leaving the room
 
-		// if the user who left the chat is the current user, emit message to their room
-		if(user) {
-			io.to(user.room).emit('message', formatMessage(`${user.room} Bot`, `${user.username} has left the chat`));
+		// if the user who left the chat is the current user
+		if(USER) {
+			// emit message to their room
+			IO.to(USER.room).emit('message', FORMAT(`${USER.room} Bot`, `${USER.username} has left the chat.`));
 
-			// Send users and room info
-			io.to(user.room).emit('roomUsers', {
-				room: user.room,
-				users: getRoomUsers(user.room)
-			}); // end io
+			// Update user list and room info for the remaining users in the room
+			IO.to(USER.room).emit('roomUsers', {room: USER.room, users: USERS.getRoomUsers(USER.room)});
 		} // end if
 	}); // end socket
+
+
+	// When the user joins the room
+	socket.on('joinRoom', ({username, room}) => {
+        	const USER = USERS.userJoin(socket.id, username, room); // Set the user who just joined and the room they joined
+
+		// Send the user to the room
+        	socket.join(USER.room);
+
+        	// When the user enters the room, have bot say welcome to the joining user
+        	socket.emit('message', FORMAT(`${USER.room} Bot`, `Welcome to ${USER.room}.`));
+
+       		// When a user joins the room, announce it to the other users in the room
+        	socket.broadcast.to(USER.room).emit('message', FORMAT(`${USER.room} Bot`, `${USER.username} has joined the chat.`));
+
+        	// Update the user list and room info for the remaining users in the room
+        	IO.to(USER.room).emit('roomUsers', {room: USER.room, users: USERS.getRoomUsers(USER.room)});
+	}); // end socket
 }); // end io
-
-// SET PORT TO SEND DATA TO
-const PORT = process.env.PORT || 3000; // Runs on available port, otherwise localhost fallback
-
-// Log which port the server is running on too console
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-// Access heroku production environment
-if (process.env.NODE_ENV === 'production') {
-    // Set code folder
-    app.use(express.static(path.join(__dirname, 'public')));
-}
-
-// Access localhost environment
-if (PORT === 3000) {
-    // Set code folder
-    app.use(express.static(path.join(__dirname, 'public')));
-}
-
-
