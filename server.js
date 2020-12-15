@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 3000; // Run server on available port, otherwis
 const ENV = process.env.NODE_ENV; // Set available port
 
 
-// Create the server running on the available port
+// Create the http server running on the available port
 SERVER.listen(PORT);
 
 // Access heroku production environment or localhost
@@ -44,12 +44,12 @@ IO.on('connection', socket => {
 
 	// When the user leaves the chatroom
 	socket.on('disconnect', () => {
-		const USER = USERS.userLeave(socket.id); // Get the current user leaving the room
+		const USER = USERS.removeUser(socket.id); // Get the current user leaving the room
 
 		// if the user who left the chat is the current user
 		if(USER) {
 			// emit message to their room
-			IO.to(USER.room).emit('message', FORMAT(`${USER.room} Bot`, `${USER.username} has left the chat.`));
+			IO.to(USER.room).emit('message', FORMAT(`${USER.room} Bot`, `${USER.username} left the chat.`));
 
 			// Update user list and room info for the remaining users in the room
 			IO.to(USER.room).emit('roomUsers', {room: USER.room, users: USERS.getRoomUsers(USER.room)});
@@ -59,7 +59,7 @@ IO.on('connection', socket => {
 
 	// When the user joins the room
 	socket.on('joinRoom', ({username, room}) => {
-        	const USER = USERS.addUser(socket.id, username, room); // Set the user who just joined and the room they joined
+        	const USER = USERS.addUser(socket.id, username, room); // Set and add the user who just joined and the room they joined
 
 		// Send the user to the room
         	socket.join(USER.room);
@@ -68,7 +68,7 @@ IO.on('connection', socket => {
         	socket.emit('message', FORMAT(`${USER.room} Bot`, `Welcome to ${USER.room}.`));
 
        		// When a user joins the room, announce it to the other users in the room
-        	socket.broadcast.to(USER.room).emit('message', FORMAT(`${USER.room} Bot`, `${USER.username} has joined the chat.`));
+        	socket.broadcast.to(USER.room).emit('message', FORMAT(`${USER.room} Bot`, `${USER.username} joined the chat.`));
 
         	// Update the user list and room info for the remaining users in the room
         	IO.to(USER.room).emit('roomUsers', {room: USER.room, users: USERS.getRoomUsers(USER.room)});

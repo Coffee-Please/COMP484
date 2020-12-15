@@ -42,7 +42,7 @@ function getCurrentUser(id) {
 
 
 // Removes the user from the chatroom
-function userLeave(id) {
+function removeUser(id) {
 	'use strict';
 
 	// Find user that left using the socket id
@@ -75,6 +75,6 @@ function getRoomUsers(room) {
 module.exports = {
 	addUser,
 	getCurrentUser,
-	userLeave,
+	removeUser,
 	getRoomUsers
 };
