@@ -5,6 +5,7 @@
 // Contains the event handlers for the chat rooms
 //======================================================================
 
+
 // Variables
 const socket = io(); // Use socket functions
 
@@ -13,14 +14,15 @@ const {username, room} = Qs.parse(location.search, {ignoreQueryPrefix: true});  
 
 
 // Join Chat room
-socket.emit('joinRoom', {username, room}); // end socket
+socket.emit('joinRoom', {username, room});
 
 
 // Get room and users
 socket.on('roomUsers', ({room, users}) => {
-
+	// Get room name to display
 	outputRoomName(room);
 
+	// Get users to display
 	outputUsers(users);
 }); // end socket
 
@@ -30,6 +32,7 @@ socket.on('message', message => {
 	// Convert UTC time to client time
 	message.time = new Date(message.time).toLocaleTimeString([], {timeStyle: "short"});
 
+	// Get message to display
 	outputMessage(message);
 
 	// Scroll down when a message is sent by user
@@ -61,13 +64,16 @@ function outputMessage(message) {
 	// Create div in HTML to hold message
 	const div = document.createElement('div');
 
+	// Add div to 'message' class
 	div.classList.add('message');
 
+	// Inject message into new div with HTML
 	div.innerHTML = `<p class="meta">${message.username}
 		<span>${message.time}</span>
 		</p>
 		<p class="text">${message.text}</p>`;
 
+	// Add message to the end of the meaasge list
 	document.querySelector('.chat-messages').appendChild(div);
 } // end outputMessages
 
@@ -90,4 +96,4 @@ function outputUsers(users) {
 function leaveRoom() {
 	// Redirect to the homepage
 	location.href = 'index.html';
-}
+} // end leaveRoom
