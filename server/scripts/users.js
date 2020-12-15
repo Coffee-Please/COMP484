@@ -2,14 +2,16 @@
 // COMP 484 | Spring 2020
 // users.js | Brandon Dahl, Priya Singh
 //
-// Manages users in chatroom
+// Manages users in chatroom on server side
 //======================================================================
 
-// Array to store current users in
-const users = [];
 
-// Join user to chat
-function userJoin(id, username, room) {
+// VARIABLES
+const users = []; // Array to store current users in
+
+
+// Adds the user to the chatroom
+function addUser(id, username, room) {
 	'use strict';
 
 	// Create a user object
@@ -24,49 +26,64 @@ function userJoin(id, username, room) {
 
 	// Return the user
 	return user;
-} // end userJoin
+} // end addUser
 
 
-// Get the current user
+// Retrieves the current user
 function getCurrentUser(id) {
 	'use strict';
 
 	// Find the user in the current user array using the socket id
-	const found =  users.find(user => user.id === id);
+	const found =  users.find(function (user) {
+		// Return the user
+		return user.id === id
+	}); // end users
 
 	// return the user found
 	return found;
 } // end getCurrentUser
 
 
-// User leaves the chat
-function userLeave(id) {
+// Removes the user from the chatroom
+function removeUser(id) {
 	'use strict';
 
 	// Find user that left using the socket id
-	const found = users.findIndex(user => user.id === id);
+	const found = users.findIndex(function (user) {
+		// Return the user
+		return user.id === id;
+	}); // end users
 
-	// If user is found, remove from array
+	// If user is found
 	if(found !== -1) {
+		// Remove the user from the array
+		const removed = users.splice(found, 1)[0];
+
 		// return the new current user array
-		return users.splice(found, 1)[0];
+		return removed;
 	} // end if
 } // end userLeave
 
 
-// Get room users
+// Finds all the users of a room
 function getRoomUsers(room) {
 	'use strict';
 
 	// Find all the user in the current room
-	return users.filter(user => user.room === room);
+	const found = users.filter(function (user) {
+		// Return user in the room
+		return user.room === room;
+	}); // end users
+
+	// Return the users found
+	return found;
 } // end getRoomUsers
 
 
 // Send functions to be used by other js files
 module.exports = {
-	userJoin,
+	addUser,
 	getCurrentUser,
-	userLeave,
+	removeUser,
 	getRoomUsers
 };

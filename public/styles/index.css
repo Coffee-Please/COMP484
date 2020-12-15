@@ -5,77 +5,88 @@
 /*======================================================*/
 
 /*===============================================*/
-/* Main Page                                     */
+/* Styling for index.html                        */
 /*===============================================*/
 
-.resheader {
-	display: none;
-}
 
+/* Title for Smaller Screens */
+.res-header {
+	display: none;
+} /* end resheader */
+
+
+/* Page Content */
 .join-main {
 	max-width: 50%;
-	margin: 80px auto;
+	margin: 5em auto;
 	color: #000000;
-	padding: 30px 40px;
+	padding: 2em;
 	background: #ffffff;
 	text-align: center;
         filter: drop-shadow(0px 10px 10px #a9aba9);
-}
+} /* end .join-main */
 
-.join-main p {
-	margin-bottom: 20px;
-}
 
+/* User Name Input */
 .join-main .form-control {
-	margin-bottom: 20px;
-}
+	margin-bottom: 2em;
+} /* end .join-main .form-control */
 
+
+/* Input Labels */
 .join-main label {
 	display: block;
-	margin-bottom: 5px;
-}
+	margin-bottom: 0.5em;
+} /* end .join-main label */
 
-.join-main input[type='text'] {
-	font-size: 16px;
-	padding: 5px;
-	height: 40px;
+
+/* Input Fields */
+.join-main input {
+	font-size: 1em;
+	padding: 0.5em;
+	height: 4em;
 	width: 100%;
-}
+} /* end .join-main input */
+
 
 /* Join Room Drop Down Select*/
 .join-main select {
 	font-size: 1em;
-	padding: 5px;
-	height: 40px;
+	padding: 0.2em;
+	height: 4em;
 	width: 100%;
-}
+} /* end .join-main select */
+
 
 /* Join Room Button */
 .join-main .btn {
-	margin-top: 20px;
+	margin-top: 2em;
 	width: 50%;
 	height: auto;
-}
+	padding: 1em;
+} /* end .join-main .btn */
+
 
 /* Adjust for smaller screens */
 @media only screen and (max-width: 700px) {
 
-        /* Join form */
+        /* Join form width in smaller screens */
         .join-main {
                 max-width: 90vw;
-        }
+        } /* end join-main */
 
-        .resheader {
+	/* Switch titles for smaller screens */
+        .res-header {
                 display: contents;
-        }
+        } /* end resheader */
 
-        .mainheader {
+        .main-header {
                 display: none;
-        }
+        } /* end mainheader */
 
         /* Adjust Nav Sizing */
         nav { 
                 width: 100%;
-        }
-}
+        } /* end nav */
+} /* end media */
 

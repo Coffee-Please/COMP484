@@ -8,64 +8,119 @@
 
 // VARIABLES
 const SOCKET = io(); // Use socket functions
-const {username, room} = Qs.parse(location.search, {ignoreQueryPrefix: true}); // Get username and room from URL, ignore special characters
+const USERINFO = Qs.parse(location.search, {ignoreQueryPrefix: true}); // Get username and room from URL, ignore special characters
 
 
-// Join Chat room
-SOCKET.emit('joinRoom', {username, room});
-
-
-// Get room and users
-SOCKET.on('roomUsers', ({room, users}) => {
-	// Add the Room name to the chat box
-	 document.getElementById('room-name').innerHTML = room;
-
-	// Add users to the Users list
-	 document.getElementById('users').innerHTML = `${users.map(user => `<li>${user.username}</li>`).join('')}`;
-}); // end socket
-
-
-// Message from server
-SOCKET.on('message', message => {
-	// Convert UTC time to client time
-	message.time = new Date(message.time).toLocaleTimeString([], {timeStyle: "short"});
-
-	// Create div in HTML to hold message
-	const div = document.createElement('div');
-
-	// Add div to 'message' class
-	div.classList.add('message');
-
-	// Inject message into new div with HTML
-	div.innerHTML = `<p class="meta">${message.username}<span> ${message.time}</span></p><p class="text">${message.text}</p>`;
-
-	// Add message to the end of the meaasge list
-	document.querySelector('.chat-messages').appendChild(div);
-
-	// Scroll down when a message is sent by user
-	 document.querySelector('.chat-messages').scrollTop =  document.querySelector('.chat-messages').scrollHeight;
-}); // end socket
+// The user joins the chatroom
+SOCKET.emit('joinRoom', {username : USERINFO.username, room : USERINFO.room});
 
 
 // Message submit handler, Listens when the user clicks submit
-document.getElementById('chat-form').addEventListener('submit', (element) => {
+document.getElementById('chat-form').addEventListener('submit', (event) => {
 	'use strict';
 
-	// prevent submission to file (default behavior)
-	element.preventDefault();
+	// prevent submission to file
+	event.preventDefault();
+
+	// Handle the event
+	getInputMessage(event);
+}); // end addEventListener
+
+
+// When a message is sent from the user
+SOCKET.on('message', message => {
+	const messageList = document.querySelector('.chat-messages'); // Get the list of messages in the chatroom
+
+	// Create the user inputted message
+	createMessage(message, messageList);
+
+	// Scroll to the bottom of the message list
+	scrollToBottom(messageList);
+}); // end socket
+
+
+// When we need to display the users in the room
+SOCKET.on('roomUsers', ({room, users}) => {
+	// Add the Room name to the chat box
+	document.getElementById('room-name').innerHTML = room;
+
+	// Update the sidebar user list
+	updateUserList(users);
+}); // end socket
+
+
+// Updates the User List in the chatroom
+function updateUserList(users) {
+	'use strict';
+
+	// Create a holder for the new user list
+	var userList = [];
+
+	// Go through the users and add them to the userList
+	users.forEach(function (user) {
+		// Format the new user
+		var newItem = `<li>${user.username}</li>`;
+
+		// Add to the list
+		return userList.push(newItem);
+	}); // end users
+
+	// Display userList in sidebar
+	 document.getElementById('users').innerHTML = userList.join('');
+} // updateUserList
+
+
+// Gets message from user
+function getInputMessage(event) {
+	'use strict';
+
+	// Get the user input
+	var userInput = event.target.elements.msg;
 
 	// Store inputted message
-	const msg = element.target.elements.msg.value;
+	const msg = userInput.value;
 
-	// Emit message to the server
+	// Send message to room
 	SOCKET.emit('chatMessage', msg);
 
 	// Clear input box after message is sent
-	element.target.elements.msg.value = '';
+	userInput.value = '';
 
-	// Focus cursor in input box
-	element.target.elements.msg.focus();
-}); // end addEventListener
+	// Activate cursor in input box
+	userInput.focus();
+} // end getInputMesssage
+
+
+// Creates the user inputted message
+function createMessage(message, messageList) {
+	'use strict';
+
+	const div = document.createElement('div'); // Create div in HTML to hold the user inputted message
+
+	// Convert UTC time to client time
+	message.time = new Date(message.time).toLocaleTimeString([], {timeStyle: "short"});
+
+	// Format message in HTML
+	var messageFormat = `<p class="meta">${message.username}<span> ${message.time}</span></p><p class="text">${message.text}</p>`;
+
+	// Add new div to 'message' class
+	div.classList.add('message');
+
+	// Inject message into new div
+	div.innerHTML = messageFormat;
+
+	// Add message to the end of the message list
+	messageList.appendChild(div);
+} // end createMessage
+
+
+// Scrolls to the bottom of the chatroom message list
+function scrollToBottom(messageList) {
+	'use strict';
+
+	// Scroll down to the bottom of the list
+	messageList.scrollTop =  messageList.scrollHeight;
+} // end scrollToBottom
 
 
 // Redirect user to main page after they leave the room

@@ -5,8 +5,9 @@
 /*======================================================*/
 
 /*===============================================*/
-/* ChatRoom Page                                 */
+/* Styling for chat.html                         */
 /*===============================================*/
+
 
 /* Whole Chat Box */
 .chat-container {
@@ -16,14 +17,16 @@
         filter: drop-shadow(0px 10px 10px #a9aba9);
         overflow: hidden;
 	border-radius: 5px;
-}
+} /* end .chat-container */
+
 
 /* Chatroom sidebar and message container  */
 .chat-main {
         display: grid;
         grid-template-columns: 1fr 3fr;
 	min-height: 45vh;
-}
+} /* end .chat-main */
+
 
 /* Chatroom sidebar box */
 .chat-sidebar {
@@ -32,7 +35,8 @@
         padding: 20px 20px 60px;
         overflow-y: scroll;
 	border-right: 1px solid #bec6c3;
-}
+} /* end .chat-sidebar */
+
 
 /* Leave Room Button */
 .chat-sidebar .btn {
@@ -41,18 +45,21 @@
 	text-decoration: none;
 	width: auto;
 	font-size: auto;
-}
+} /* end .chat-sidebar .btn */
+
 
 /* User List Title */
 .chat-sidebar h3 {
         margin-bottom: 10px;
         margin-top: 20px;
-}
+} /* end .chat-sidebar h3 */
+
 
 /* Sidebar User List */
 .chat-sidebar ul li {
         padding: 10px 0;
-}
+} /* end .chat-sidebar ul li */
+
 
 /* Message Area */
 .chat-messages {
@@ -60,14 +67,16 @@
         min-height: 60vh; 
 	max-height: 60vh;
         overflow-y: scroll;
-}
+} /* end .chat-messages */
 
-/* Contains H2, RESLeave Button, Message Display  */
+
+/* Contains H2, Smaller screen Leave Button, Message Display */
 .chat-form-message-area .btn {
 	display: none;
 	float: right;
 	margin: 1em;
-}
+} /* end .chat-form-message-area .btn */
+
 
 /* Message Text Box Background */
 .chat-messages .message {
@@ -75,7 +84,8 @@
         margin-bottom: 15px;
         background-color: #bec6c3;
         border-radius: 5px;
-}
+} /* end .chat-messages .message */
+
 
 /* Message Text Box Contents */
 .chat-messages .message .meta {
@@ -86,22 +96,26 @@
         margin-bottom: 7px;
 }
 
+
 /* Message Time */
 .chat-messages .message .meta span {
         color: #d22030;
-}
+} /* end .chat-messages .message .meta span */
+
 
 /* Bottom Message Bar */
 .chat-form-container {
         padding: 20px 30px;
         background-color: #ffffff;
         border-top: 1px solid #bec6c3;
-}
+} /* end .chat-form-container */
+
 
 /* Message Input Bar */
 .chat-form-container form {
         display: flex;
-}
+} /* end .chat-form-container form */
+
 
 /* Message Input Bar Input */
 .chat-form-container input {
@@ -110,25 +124,30 @@
         height: 3em;
 	min-width: 70%;
         flex: 1;
-}
+} /* end .chat-form-container input */
 
-/* Media Query */
+
+/* Change layout for smaller screens */
 @media only screen and (max-width: 700px) {
-
+	
+	/* Change content from grid to block */
         .chat-main {
                 display: block;
-        }
+        } /* end .chat-main */
 
+	/* Hide sidebar */
         .chat-sidebar {
                 display: none;
-        }
+        } /* end .chat-sidebar */
 
+	/* Remove padding from user input bar */
 	.chat-form-container {
 		padding: 0;
-	}
+	} /* end .chat-form-container */
 
+	/* Show res-Leave Button */
 	.chat-form-message-area .btn {
 		display: block;
-	}
-}
+	}/* end .chat-form-message-area .btn */
+} /* end media */
 

@@ -1,74 +1,107 @@
+<!--
+ COMP 484 | Fall 2020
+ Brandon Dahl, Priya Singh
+ File: chat.html
+-->
+
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<head>
+		<!-- Metadata -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="styles/root.css">
-  <link rel="stylesheet" href="styles/chat.css">
-  <link rel="icon" type="image/x-icon" href="img/favicon.ico"/>
+		<!-- Stylesheets and Favicon -->
+		<link rel="stylesheet" type="text/css" href="styles/root.css">
+		<link rel="stylesheet" type="text/css" href="styles/chat.css">
+		<link rel="icon" type="image/x-icon" href="img/favicon.ico"/>
 
-  <title>484 Chatroom</title>
+		<title>484 Chatroom</title>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.4/qs.min.js" integrity="sha512-BHtomM5XDcUy7tDNcrcX1Eh0RogdWiMdXl3wJcKB3PFekXb3l5aDzymaTher61u6vEZySnoC/SAj2Y/p918Y3w==" crossorigin="anonymous" defer></script>
-  <script src="/socket.io/socket.io.js" defer></script> <!--Access socket.io Library -->
-  <script src="scripts/chat.js" defer></script> <!--Retrieves from server.js-->
-</head>
+		<!-- Scripts -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.4/qs.min.js" integrity="sha512-BHtomM5XDcUy7tDNcrcX1Eh0RogdWiMdXl3wJcKB3PFekXb3l5aDzymaTher61u6vEZySnoC/SAj2Y/p918Y3w==" crossorigin="anonymous" defer></script> <!-- Content Delivery Network Library -->
+		<script type="text/javascript" src="/socket.io/socket.io.js" defer></script> <!-- Socket.io Library -->
+		<script type="text/javascript" src="scripts/chat.js" defer></script> <!-- Chatroom functionality -->
+	</head>
 
-<body>
-	<div class="chat-container">
-	<main class="chat-main">
+	<body>
+		<div class="chat-container">
+			<main class="chat-main">
 
-	<!--Sidebar-->
-	<div class="chat-sidebar">
-        <button class="btn" onclick="leaveRoom();">
-		<svg class="bi bi-chevron-double-left" xmlns="http://www.w3.org/2000/svg">
-			<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-			<path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-		</svg>
-		Leave Room
-	</button>
-        <h3>	
-		<svg class="bi bi-people-fill" xmlns="http://www.w3.org/2000/svg">
-  			<path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
-		</svg>
-		Users
-	</h3>
-        <ul id="users"></ul>
-      </div>
+				<!-- Sidebar -->
+				<div class="chat-sidebar">
 
-	<div class="chat-form-message-area">
-	        <button class="btn" onclick="leaveRoom();">
-			<svg class="bi bi-chevron-double-left" xmlns="http://www.w3.org/2000/svg">
-				<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-				<path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-			</svg>
-			Leave Room
-		</button>
-	<!--Message Box-->
-		<h2 id="room-name"></h2>
-		<div class="chat-messages"></div>
-	</div>
-	</main>
+					<!-- Sidebar Leave Room Button -->
+					<button class="btn" onclick="leaveRoom();">
 
-	<!--Message Bar-->
-    <div class="chat-form-container">
-      <form id="chat-form">
-        <input id="msg" type="text" placeholder="Enter Message" required autocomplete="off"/>
-        <button class="btn">
-		<svg class="bi bi-reply-fill" xmlns="http://www.w3.org/2000/svg">
-  			<path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
-		</svg>
-		Send
-	</button>
-      </form>
-    </div>
+						<!-- Leave Room Button Icon -->
+						<svg class="bi bi-chevron-double-left" xmlns="http://www.w3.org/2000/svg">
+							<title>Leave Room Icon</title>
+							<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+							<path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+						</svg>
+						Leave Room
+					</button>
 
-  </div>
-</body>
+					<!-- Display User List -->
+				        <h3>
+						
+						<!-- User List Icon -->	
+						<svg class="bi bi-people-fill" xmlns="http://www.w3.org/2000/svg">
+							<title>User List Icon</title>
+							<path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+						</svg>
+						Users
+					</h3>
+					<ul id="users"></ul>
+				</div>
 
-<footer>
-  <p>&copy;2020 All rights reserved.</p>
-</footer>
+				<!-- Chat Message List Area -->
+				<div class="chat-form-message-area">
 
+					<!-- Small Screen Leave Room Button -->
+				        <button class="btn" onclick="leaveRoom();">
+
+						<!-- Leave Room Button Icon -->
+						<svg class="bi bi-chevron-double-left" xmlns="http://www.w3.org/2000/svg">
+							<title>Leave Room Icon</title>
+							<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+							<path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+						</svg>
+						Leave Room
+					</button>
+
+					<!-- Message List Display Box -->
+					<h2 id="room-name"></h2>
+					<div class="chat-messages"></div>
+				</div>
+			</main>
+
+			<!-- User Input Message Bar -->
+			<div class="chat-form-container">
+				<form id="chat-form">
+
+					<!-- Message Input Area -->
+					<input id="msg" type="text" placeholder="Enter Message" required autocomplete="off"/>
+
+					<!-- Send Button -->
+				        <button class="btn">
+
+						<!-- Send Button Icon -->
+						<svg class="bi bi-reply-fill" xmlns="http://www.w3.org/2000/svg">
+							<title>Send Icon</title>
+				  			<path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
+						</svg>
+						Send
+					</button>
+				</form>
+			</div>
+		</div>
+	</body>
+
+	<footer>
+		<!-- Copyright Disclaimer -->
+		<p>&copy;2020 All rights reserved.</p>
+	</footer>
 </html>
