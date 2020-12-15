@@ -4,43 +4,43 @@
 /* File: about.css                                      */
 /*======================================================*/
 
+/*=========================*/
+/* Styling for about.html  */
+/*=========================*/
 
+
+/* Smaller screen title */
 .resheader {
         display: none;
-}
+} /* end resheader */
 
-.join-main {
-        max-width: 50%;
-        margin: 80px auto;
-        color: #000000;
-        padding: 30px 40px;
-        background: #ffffff;
-        text-align: center;
-        filter: drop-shadow(0px 10px 10px #a9aba9);
-}
 
+/* About page content */
 .about-main {
 	text-align: center;
 	padding: 1em;
-}
+} /* end about-main */
 
+
+/* About page description */
 .about-text {
 	padding: 1em;
-}
+} /* end about-text */
+
 
 /* Adjust for smaller screens */
 @media only screen and (max-width: 700px) {
-
+	/* Switch Title on smaller screens */
         .resheader {
                 display: contents;
-        }
+        } /* end resheader */
 
         .mainheader {
                 display: none;
-        }
+        } /* end mainheader */
 
         /* Adjust Nav Sizing */
         nav { 
                 width: 100%;
-        }
-}
+        } /* end nav */
+} /* end media */

@@ -8,11 +8,11 @@
 
 // VARIABLES
 const SOCKET = io(); // Use socket functions
-const userInfo = Qs.parse(location.search, {ignoreQueryPrefix: true}); // Get username and room from URL, ignore special characters
+const USERINFO = Qs.parse(location.search, {ignoreQueryPrefix: true}); // Get username and room from URL, ignore special characters
 
 
 // The user joins the chatroom
-SOCKET.emit('joinRoom', {username : userInfo.username, room : userInfo.room});
+SOCKET.emit('joinRoom', {username : USERINFO.username, room : USERINFO.room});
 
 
 // Message submit handler, Listens when the user clicks submit
@@ -22,20 +22,8 @@ document.getElementById('chat-form').addEventListener('submit', (event) => {
 	// prevent submission to file
 	event.preventDefault();
 
-	// Get the user input
-	var userInput = event.target.elements.msg;
-
-	// Store inputted message
-	const msg = userInput.value;
-
-	// Send message to room
-	SOCKET.emit('chatMessage', msg);
-
-	// Clear input box after message is sent
-	userInput.value = '';
-
-	// Activate cursor in input box
-	userInput.focus();
+	// Handle the event
+	getInputMessage(event);
 }); // end addEventListener
 
 
@@ -56,12 +44,20 @@ SOCKET.on('roomUsers', ({room, users}) => {
 	// Add the Room name to the chat box
 	document.getElementById('room-name').innerHTML = room;
 
+	// Update the sidebar user list
+	updateUserList(users);
+}); // end socket
+
+
+// Updates the User List in the chatroom
+function updateUserList(users) {
+	'use strict';
+
 	// Create a holder for the new user list
 	var userList = [];
 
 	// Go through the users and add them to the userList
 	users.forEach(function (user) {
-
 		// Format the new user
 		var newItem = `<li>${user.username}</li>`;
 
@@ -71,7 +67,28 @@ SOCKET.on('roomUsers', ({room, users}) => {
 
 	// Display userList in sidebar
 	 document.getElementById('users').innerHTML = userList.join('');
-}); // end socket
+} // updateUserList
+
+
+// Gets message from user
+function getInputMessage(event) {
+	'use strict';
+
+	// Get the user input
+	var userInput = event.target.elements.msg;
+
+	// Store inputted message
+	const msg = userInput.value;
+
+	// Send message to room
+	SOCKET.emit('chatMessage', msg);
+
+	// Clear input box after message is sent
+	userInput.value = '';
+
+	// Activate cursor in input box
+	userInput.focus();
+} // end getInputMesssage
 
 
 // Creates the user inputted message
